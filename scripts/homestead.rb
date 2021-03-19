@@ -2,7 +2,7 @@
 class Homestead
   def self.configure(config, settings)
     # Set The VM Provider
-    ENV['VAGRANT_DEFAULT_PROVIDER'] = settings['provider'] ||= 'virtualbox'
+    ENV['VAGRANT_DEFAULT_PROVIDER'] = settings['provider'] ||= 'hyperv'
 
     # Configure Local Variable To Access Scripts From Remote Location
     script_dir = File.dirname(__FILE__)
@@ -19,7 +19,7 @@ class Homestead
     config.vm.define settings['name'] ||= 'homestead'
     config.vm.box = settings['box'] ||= 'laravel/homestead'
     unless settings.has_key?('SpeakFriendAndEnter')
-      config.vm.box_version = settings['version'] ||= '>= 11.0.0, < 12.0.0'
+      config.vm.box_version = settings['version'] ||= '>= 10.0.0, < 11.0.0'
     end
     config.vm.hostname = settings['hostname'] ||= 'homestead'
 
@@ -366,7 +366,7 @@ class Homestead
               site['to'],                 # $2
               site['port'] ||= http_port, # $3
               site['ssl'] ||= https_port, # $4
-              site['php'] ||= '8.0',      # $5
+              site['php'] ||= '7.4',      # $5
               params ||= '',              # $6
               site['xhgui'] ||= '',       # $7
               site['exec'] ||= 'false',   # $8
